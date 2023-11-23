@@ -482,7 +482,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -514,7 +514,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
 
@@ -543,7 +543,7 @@ public class Dewantara extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle SQL exception (e.g., display an error message)
+            JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }
     }
@@ -577,7 +577,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
     }
     }
@@ -609,7 +609,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
 
@@ -636,7 +636,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -661,7 +661,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -709,7 +709,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
 
@@ -747,7 +747,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -765,7 +765,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -789,7 +789,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -815,7 +815,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
     
@@ -841,7 +841,7 @@ public class Dewantara extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
      

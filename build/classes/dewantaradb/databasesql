@@ -1,0 +1,215 @@
+USE Dewantara;
+
+-- Tabel Siswa
+CREATE TABLE Siswa (
+    NIS VARCHAR(20) PRIMARY KEY, -- Assuming a reasonable length for NIS
+    Nama VARCHAR(50),
+    Gender VARCHAR(10),
+    Tempat VARCHAR(50),
+    TanggalLahir DATE,
+    Alamat VARCHAR(100),
+    noTelp VARCHAR(20)
+);
+
+-- Tabel OrangTua
+CREATE TABLE OrangTua (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    NIS VARCHAR(20),
+    FOREIGN KEY (NIS) REFERENCES Siswa(NIS),
+    NamaAyah VARCHAR(50),
+    KerjaAyah VARCHAR(50),
+    NamaIbu VARCHAR(50),
+    KerjaIbu VARCHAR(50)
+);
+
+-- Tabel Transaksi
+CREATE TABLE Transaksi (
+    NomorTransaksi INT PRIMARY KEY IDENTITY(1,1),
+    NIS VARCHAR(20),
+    FOREIGN KEY (NIS) REFERENCES Siswa(NIS),
+    Pembayar VARCHAR(50),
+    JumlahUang DECIMAL(10, 2),
+    TanggalBayar DATE,
+    Penerima NVARCHAR(50)
+);
+
+-- Tabel KeteranganTransaksi
+CREATE TABLE KeteranganTransaksi (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    NomorTransaksi INT,
+    FOREIGN KEY (NomorTransaksi) REFERENCES Transaksi(NomorTransaksi),
+    JumlahUang DECIMAL(10, 2),
+    Keterangan VARCHAR(100)
+);
+
+-- Isikan data ke dalam tabel Siswa
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp)
+VALUES 
+(1, 'John Doe', 'Male', 'Jakarta', '2000-01-01', 'Jl. ABC No. 123', '08123456789'),
+(2, 'Jane Doe', 'Female', 'Bandung', '1999-02-15', 'Jl. XYZ No. 456', '08234567890'),
+(3, 'Alice Smith', 'Female', 'Surabaya', '2001-05-10', 'Jl. PQR No. 789', '08345678901'),
+(4, 'Bob Johnson', 'Male', 'Yogyakarta', '2000-12-03', 'Jl. LMN No. 1011', '08456789012'),
+(5, 'Eva Brown', 'Female', 'Semarang', '1998-09-20', 'Jl. DEF No. 1314', '08567890123');
+
+-- Isikan data ke dalam tabel OrangTua
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu)
+VALUES 
+(1, 'John Doe Sr.', 'Engineer', 'Jane Doe Sr.', 'Doctor'),
+(2, 'Bob Doe Sr.', 'Teacher', 'Alice Doe Sr.', 'Nurse'),
+(3, 'David Smith Sr.', 'Businessman', 'Emma Smith Sr.', 'Housewife'),
+(4, 'Gary Johnson Sr.', 'Lawyer', 'Grace Johnson Sr.', 'Chef'),
+(5, 'Henry Brown Sr.', 'Architect', 'Helen Brown Sr.', 'Artist');
+
+-- Isikan data ke dalam tabel Transaksi
+INSERT INTO Transaksi (NomorTransaksi, NIS, Pembayar, JumlahUang, TanggalBayar, Penerima)
+VALUES 
+(101, 1, 'John Doe', 500000, '2023-01-10', 'School Administration'),
+(102, 2, 'Jane Doe', 750000, '2023-01-15', 'School Administration'),
+(103, 3, 'Alice Smith', 600000, '2023-01-20', 'School Administration'),
+(104, 4, 'Bob Johnson', 900000, '2023-01-25', 'School Administration'),
+(105, 5, 'Eva Brown', 800000, '2023-02-01', 'School Administration');
+
+-- Isikan data ke dalam tabel KeteranganTransaksi
+INSERT INTO KeteranganTransaksi (ID,NomorTransaksi, JumlahUang, Keterangan)
+VALUES 
+(1,101, 500000, 'Payment for school fees'),
+(2,102, 750000, 'Payment for school fees'),
+(3,103, 600000, 'Payment for school fees'),
+(4,104, 900000, 'Payment for school fees'),
+(5,105, 800000, 'Payment for school fees');
+
+
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723001', 'Abrisam Nabil Ramadhan', 'L', 'Sleman', '2017-04-06', 'Prima Harapan Regency Blok L 12 No. 12 Harapan Baru Bekasi Utara', '0895-3938-47144');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723003', 'Almer Finley El Zeyad', 'L', 'Bekasi', '2017-08-12', 'Villa Mas Indah Blok A6 No 8 Rt. 002 Rw. 018 Perwira Bekasi Utara 17122', '0856-8338-299');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723014', 'Arka Reynard Elfatih', 'L', 'Jakarta', '2017-04-26', 'Cluster Golden Prima Harapan Regency Blok E1 No. 28 Harapan Baru Bekasi Utara 17123', '0822-9963-7505');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723015', 'Arsyila Naura Salsabila', 'P', 'Bekasi', '2017-08-08', 'Taman Wisma Asri Jl.Anggur 2 Blok . 23 No.48 Rt. 002 Rw. 011 Teluk Pucung Bekasi Utara 17121', '0812-8033-6456');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723004', 'Asma Haura Mumtaziyah', 'P', 'Surabaya', '2017-02-27', 'Villa Mutiara Gading 2 A 88', '0877-9609-7961');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723005', 'Elnino Muhammad Hanantyo', 'L', 'Bekasi', '2017-10-28', 'Prima Harapan Regency Blok I 9 No. 19 Harapan Baru Bekasi Utara 17123', '0811-1705-010');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723006', 'Hanif Aulia Latif', 'L', 'Bekasi', '2017-12-21', 'Jl.Duta Graha VII E 4 /6 Bekasi Utara', '0857-1661-9340');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723013', 'Hannan', 'P', 'Kudus', '2017-09-11', 'Griya Syariah 2 Blok G5. Jl Tanggul Rt. 01 Rw. 04', '0856-4077-6499');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723007', 'Hashima Raiqa', 'P', 'Jakarta', '2018-06-18', 'Kav. Wisma Bahagia Ujung Harapan Rt.04 Rw. 07 No. 56 Kel. Bahagia Kec. Babelan Kab. Bekasi', '0818-955-761');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723016', 'Kennard Savian Radika', 'L', 'Bekasi', '2018-02-15', 'Prima Harapan Regency Blok C5 No. 8 Harapan Baru Bekasi Utara', '0813-8011-0834');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723008', 'Kevin Zaydan Syathir', 'L', 'Bekasi', '2017-12-29', 'Summarecon Burgundy Jl.Burgundy 7 Blok RAG 23', '0822-9814-4489');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723009', 'Muhammad Arkhan Zain', 'L', 'Medan', '2017-08-08', 'Prima Harapan Regency Blok A4 No. 51 Rt. 002 Rw. 009 Harapan Baru Bekasi Utara 17123', '0823-6155-5508');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723002', 'Muhammad Faqih Kurniawan', 'L', 'Samarinda', '2017-12-13', 'Duta Harapan Jl. Duta Harapan I Blok AA No. 20 Rt. 002 Rw. 010 Harapan Baru Bekasi Utara 17123', '0812-8221-7441');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723010', 'Shakeel Ziadru Louvin', 'L', 'Bekasi', '2017-12-08', 'Perum Telaga Mas Blok BB 8 No 11 A Harapan Baru Bekasi Utara 17123', '0812-9155-6689');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723011', 'Shaqeena Azkayra Ektiesa', 'P', 'Bekasi', '2017-06-13', 'Prima Harapan Regency Blok D4 No. 26 Rt. 011 Rw. 009 Harapan Baru Bekasi Utara', '0822-1350-0782');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('10123275031723012', 'Zayba Azkadina Abhinowo', 'P', 'Bandung', '2017-09-13', 'Tytyan Indah Blok Z2 No. 2 Rt. 006 Rw. 012 Kali Baru Medan Satria Bekasi17133', '0813-2299-0725');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486002', 'Alea Rayna Pasurangga', 'P', 'Bekasi', '2018-02-17', 'VIP Blok E5 No. 31', '0812-6734-4316');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486001', 'Alifa Islamadina', 'P', 'Bekasi', '2017-12-20', 'Cluster Magndia Residence Jl. Magnolia Timur 6 Blok E1 No.11 Summarecon', '0812-9773-3950');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486002', 'Annasya Adreena Zimmi', 'P', 'Tangerang', '2017-11-25', 'Jl. Burgundy 10 Blok RAJ 39', '0813-8394-0141');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486001', 'Fatimah Ruby Azzahra', 'P', 'Bandung', '2017-02-19', 'Prima Harapan Regency Blok C 10 /22', '0822-1693-8786');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486003', 'Gillian Zach Khaled', 'L', 'Bekasi', '2018-04-20', 'TWA 2 Jl. Cempaka Raya No. 120A Rt. 05 Rw. 30 Blok U27 Bekasi Utara', '0812-8433-3599');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486003', 'Irsyad Arraihan Hidayat', 'L', 'Sleman', '2017-12-08', 'Kingspoint Privat Residence Jl. Perjuagan No. 4 Teluk Pucung Bekasi Utara', '0857-8118-6091');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486004', 'Khaleef Fardan Mauza', 'L', 'Bekasi', '2017-07-17', 'Burgundy Residence Blok RaI 32 Harapan Baru Bekasi Utara', '0817-172-740');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486005', 'Layyinatus Syifa Rahman', 'P', 'Ponorogo', '2018-04-24', 'Telaga Mas Blok BA 6 No 59 Bekasi Utara', '0812-3152-2241');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486004', 'Maryam Abiyya Hunafa', 'P', 'Tegal', '2017-06-21', 'Jl. Duta V Blok A6 No.14 Harapan Baru Bekas Utara', '0858-9117-9113');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486006', 'Mikayla Kanaya Putri Maulana', 'P', 'Jakarta', '2017-04-11', 'Prima Harapan Regency Blok L12 No. 1 Rt. 001 Rw. 012 Kel. Harapan Baru Kec. Bekasi Utara 17123', '0811-9923-196');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486005', 'Muhammad Al Faqih', 'L', 'Bekasi', '2018-03-19', 'Villa Indah Permai Blok H23 No 3 Rt. 009 Rw. 035 Kel. Teluk Pucung Bekasi Utara 17121', '0893-488-2021');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486007', 'Muhammad Alfarezel Abrisam Putra', 'L', 'Bekasi', '2018-01-31', 'Duta Harapan IV No. 33 Rt. 002 Rw. 010 Kel. Harapan Baru Kec. Bekasi Utara 17123', '0813-1608-2055');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486006', 'Muhammad Andhanu Hamka Prakoso', 'L', 'Jakarta', '2017-12-16', 'Prima Harapan Regency Blok D5 No. 1 Rt. 011 Rw. 009 Kel. Harapan Baru Kec. Bekasi Utara 17123', '0819-876-509');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486008', 'Muhammad Ilyas Hamid Albani', 'L', 'Bekasi', '2017-06-23', 'Permata Hijau Permai Blok I 2 No.19 Rt. 006 Rw. 020 Kaliabang Tengah Bekasi Utara 17125', '0812-1407-0511');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486009', 'Muhammad Raihan', 'L', 'Bekasi', '2017-07-18', 'Prima Harapan Regency Blok I 7 No. 10 Rt. 003 Rw. 018 Harapan Baru Bekasi Utara 17123', '0813-1064-4844');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486010', 'Mutiah Azzikra', 'P', 'Bekasi', '2017-12-05', 'Prima Harapan Regency Blok B 5 No. 48 Rt. 004 Rw. 009 Harapan Baru Bekasi Utara 17123', '0821-7747-7412');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486007', 'Rafkalfath Firaz', 'L', 'Bekasi', '2018-12-03', 'Prima Harapan Regency Cluster Golden Blok E1 No. 22 Harapan Baru Bekasi Utara 17123', '0812-2512-8580');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486010', 'Rassya Keenan Umar', 'L', 'Bekasi', '2017-08-03', 'Taman Wisma Asri Blok DD 29 No. 3 Rt. 004 Rw. 028 Teluk Pucung Bekasi Utara 17121', '0813-1975-7975');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486008', 'Riani Arsyila Satyawati', 'P', 'Bekasi', '2017-11-16', 'Alinda 1 Blok B2 No 29 Kaliabang Bekasi Utara', '0812-1862-3030');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486011', 'Shalahuddin Thariq Al Fatih', 'L', 'Cirebon', '2017-12-08', 'Prima Harapan Regency Cluster Blossomville Blok I7 No. 1 Rt. 003 Rw. 018 Harapan Baru Bekasi Utara', '0813-2370-7911');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486012', 'Syafiq Athadzaky Zikri', 'L', 'Bekasi', '2018-04-25', 'Jl. Duta Mas II Blok BA 6 No. 23 Harapan Baru Kec. Bekasi Utara', '0856-4305-6399');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2240486013', 'Syarifa Sheza Azzura', 'P', 'Bekasi', '2018-04-13', 'Prima Harapan Regency Blok H 1 No 28 Rt. 006 Rw. 018 Harapan Baru Kec. Bekasi Utara', '0812-8585-3055');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486009', 'Aban Abdurrahman', 'L', 'Bekasi', '2018-11-29', 'Perumahan Griya Syariah 2 Blok H/2', '0821-2326-6471');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486010', 'Abdullah Khairul Ahnaf', 'L', 'Bekasi', '2018-06-19', 'Jl. Sawo 3 No. 63 Kp Dua Rt. 03 Rw. 015 Jakasampurna, Bekasi Barat 17145', '0815-7501-9408');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486019', 'Abdurrahman Zubair', 'L', 'Depok', '2019-02-15', 'Duta Harapan Blok B1A No. 6, Rt. 001 Rw. 016, Harapan Baru, Bekasi Utara , Kota Bekasi ,17123', '0856-9559-1197');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486020', 'Alfarezel Abiandhabi Pradana', 'L', 'Bekasi', '2018-07-26', 'Prima Harapan Regency Blok D7 No. 8 Harapan Baru Bekasi Utara', '0822-1001-8600');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486021', 'Annasya Khanza Zafira', 'P', 'Jakarta', '2019-02-04', 'Prima Harapan Regency Blok C8 No 7 Harapan Baru Bekasi Utara', '0812-2141-7309');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486011', 'Aqilla Yamina Anandhisya', 'P', 'Jakarta', '2023-05-19', 'Taman Wisma Asri N 36 No. 178 Rt. 006 Rw. 032 Teluk Pucung Bekasi Utara 17121', '0822-3183-3384');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486012', 'Davin Arya Faridzky', 'L', 'Bekasi', '2018-07-31', 'PHR Cluser Golden Blok E 2 No 21 Harapan Baru Bekasi Utara', '0857-1758-6000');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486022', 'Elzio Abrisam Kavaya', 'L', 'Bekasi', '2019-01-23', 'Prima Harapan Regency Blok B 5 No. 51 Rt. 004 Rw. 009 Harapan Baru Bekasi Utara 17123', '0813-1724-0384');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486023', 'Qiandra Shanum Putri Liriko', 'P', 'Bekasi', '2018-08-23', 'Prima Harapan Regency Blok C9 No. 6 Harapan Baru Bekasi Utara', '0813-1187-5067');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486024', 'Rafardhan Athalla Pardomuan', 'L', 'Jakarta', '2018-03-02', 'Golden City Cluster Greenwood Blok G No 2 Bekasi Utara', '0856-7892-193');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486025', 'Raihana Ayu Nismara', 'P', 'Bekasi', '2019-05-03', 'Prima Harapan Regency Blok L 9 No. 2 Harapan Baru Bekasi Utara', '0813-1907-6017');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486026', 'Syafiq Yazid Nugroho', 'L', 'Pekanbaru', '04-10 2018', 'Telaga Mas Blok BB No. 31 Rt. 013 Rw. 016 Harapan Baru Bekasi Utara', '0822-8769-2955');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486013', 'Uwais Abdurrahman', 'L', 'Jakarta', '2018-12-06', 'Jl. Sersan Misnadi Gg. Binangun II No .55 RT 02 RW 24 Kaliabang Tengah, Bekasi Utara', '0857-5135-3258');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486027', 'Xavier Arashy Ipong', 'L', 'Bekasi', '2019-08-01', 'Prima Harapan Regency Cluser Golden Blok F 3 No. 16 Rt. 015 Rw. 009 Harapan Baru Bekasi Utara', '0856-8456-6984');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486014', 'Abdurrahman', 'L', 'Bekasi', '2018-12-06', 'Prima Harapan Regency Blok L 6 No. 37 Rt. 001 Rw. 012 Kel. Harapan Baru. Kec. Bekasi Utara', '0852-6345-9128');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486028', 'Aisyah Yumna Dahayu Kinandari', 'P', 'Sleman', '2018-10-31', 'Prima Harapan Regency Blok I9 No 40 Harapan Baru Bekasi Utara', '0813-1552-2902');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486029', 'Aqila Mayesha Inara', 'P', 'Jakarta', '2019-01-27', 'Prima Harapan Regency Blok A4 No.78 Harapan Baru Bekasi Utara', '0813-8092-9548');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486030', 'Arfan Naufal Rafassya', 'L', 'Jakarta', '2019-02-19', 'Prima Harapan Regency Blok I 5 No 7 Rt. 02 RW 18 Haraoan Baru Bekasi Utara', '0812-2021-2152');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486031', 'Haziq Isnanul Hafidz', 'L', 'Jakarta', '2019-04-15', 'Prima Harapan Regency Blok C10 No. 29 Harapan Baru Bekasi Utara', '0852-6387-8951');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486032', 'Kafeel Kalandra Arkaan Wicaksno', 'L', 'Bekasi', '2018-10-31', 'Prima Harapan Regency Blok A4 No.82 Rt. 002 Rw. 009 Harapan Baru Bekasi Utara', '0811-1899-044');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486015', 'Khanza Aretha Marzia', 'P', 'Bekasi', '2018-07-31', 'Jl. Lotus 6 No IE 08 Sumarecon Bekasi', '0812-8732-1989');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486033', 'Muhammad Azka Faeyza', 'L', 'Jakarta Selatan', '2018-05-10', 'The Orchard Summarecon Olive Residence, Jl. Olive 7 Blok REE 12 Rt. 001 Rw. 001 Harapan Baru Bekasi Utara 17123', '0877-6935-2135');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486016', 'Muhammad Hanif Zaidan', 'L', 'Bekasi', '2018-03-20', 'Prima Harapan Regency Blok L9 No. 6 Harapan Baru, Bekasi Utara', '0813-2877-1454');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486034', 'Muhammah Khaleed Abdurrahman', 'L', 'Jakarta', '2018-07-23', 'Prima Harapan Regency Blok J1 No. 33 Harapan Baru Bekasi Utara', '0816-993-508');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486035', 'Queensha Amara Adilla', 'P', 'Bogor', '2019-02-17', 'Prima Harapan Regency Blok L5 No. 3 rt. 009 Rw. 012 Harapan Baru Bekasi Utara', '0889-7308-3959');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486017', 'Rasyid Ahmad Fahrezy', 'L', 'Bekasi', '2018-07-26', 'Perum Telaga Mas Blok L10 No. 35 Rt. 003 Rw.017 Harapan Baru Bekasi Utara 17123', '0856-7863-966');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486036', 'Sabrina Salshabilla Alesha Putri', 'P', 'Bekasi', '2018-09-22', 'Villa Masa Indah Blok C3 No. 8', '0821-1207-8780');
+INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES ('2340486018', 'Zain Arham', 'L', 'Bekasi', '2018-06-22', 'Jl. Duta Mas. Blok BB 9 No. 11A Harapan Baru Bekasi Utara 17123', '0812-9124-2471');
+
+
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723001', 'Benny Prihanto', 'Wiraswasta', 'Febrian Cahyoning Susanti', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723003', 'Bayu Arie Senopati ', 'Karyawan Swasta', 'Yuanita Andjani', 'Karyawan Swasta ');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723014', 'Suyoko', 'Wiraswasta', 'Nur  Khauliyah  ', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723015', 'Febriannur Yatesda', 'Wirausaha', 'Naristi Primasari', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723004', 'Alim Adi Priyatna', 'Pegawai', 'Siti Muflihah', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723005', 'Handim Setyo Hanantyo', 'Karyawan', 'Dwi Permatasari Siregar', 'Terapis');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723006', 'Dimas Yoga Rukmana', 'PNS', 'Meidina Nurfitriani', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723013', 'Rusydan Abdul Hadi', 'Wiraswasta', 'Yumna Farahiyah', 'Ibu Rumah Tangga/Guru');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723007', 'Chandra', 'Karyawan Swasta', 'Kristia Ningsih', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723016', 'Ucok Awaludin', 'Karyawan Swasta', 'Indri Damayani Yusuf', 'Karyawan Swasta ');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723008', 'Mahardhika Hari Priantoro', 'Karyawan Swasta', 'Cindy Cintya Aryani', 'Karyawan Swasta ');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723009', 'Andi Mulya Suratman', 'Dokter', 'Annisa Yuanita Anggraeni', 'Dokter');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723002', 'Andi Kurniawan', 'Karyawan Swasta', 'Endah Setyorini', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723010', 'Berry Pratama ', 'Karyawan Swasta', 'Dwinita Lestari', 'Wiraswasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723011', 'Eko Daryanto', 'PNS', 'Titis Safitri', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('10123275031723012', 'Grahito Abhinowo', 'Karyawan Swasta', 'Indita Agustiani', 'Karyawan Swasta ');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486002', 'Dimas Pasurangga', 'Wirausaha', 'Neni Nuraeni', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486001', 'Abdurrahmat', 'Wiraswasta', 'Weni Widya', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486002', 'Anna Jimmi', 'Wiraswasta', 'Liana Junita Kartika Sari', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486001', 'Aditya Wicaksono', 'Karyawan Swasta', 'Bergie Monami', 'Enterpreneur');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486003', 'Rony Adi Prasetyo', 'Karyawan BUMN', 'Iik Dian Iswari', 'Karyawan Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486003', 'Mohamad Zia`ul Hidayat', 'Pegawai BUMN', 'Felicia Anggit Mustika Sari', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486004', 'Dimas Budi Wicaksono', 'Karyawan Swasta', 'Siti Zarah Eka Putri', 'Karyawan Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486005', 'Miftahur Rahman', 'ASN', 'Hanik Yunitasari', 'ASN');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486004', 'Muhammad Syafii', 'ASN', 'Urfatur Rizki', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486006', 'Maulana', '-', 'Nova Dwi Garini Kunarko P.', 'Pegawai Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486005', 'Ridhwan Fauzi', 'Wirausaha', 'Mariah Ulfah', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486007', 'Angga Pribadi Putra', 'Karyawan Swasta', 'Winda Sri Meida Yanti', 'Karyawan Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486006', 'Hananto Prakoso', 'ASN', 'Citra Ayu Anggraeni', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486008', 'Yoga Pratama', 'Karyawan ', 'Qurrota Ayun Nurul Hidayat', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486009', 'Agus', 'Karyawan Swasta', 'Khairunnisah Abdul Karim', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486010', 'Marzuki ', 'Wiraswasta', 'Yuni Ernianti', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486007', 'Nafi Ustadzar', 'Karyawan Swasta', 'Rhisca Nur Utami Dewi', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486010', 'M. Riswan', 'Wiraswasta', 'Herna Niawati', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486008', 'Donny', 'Wiraswasta', 'Nurhayati', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486011', 'Marcel Tirawan', 'PNS', 'Pralapita Putri Handayani', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486012', 'Ismarwanto Wahyu Setiawan', 'Karyawan Swasta', 'Sri Purwanti ', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2240486013', 'Al Hasan ', 'Pegawai Swasta', 'Ariyanti', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486009', 'Denis Ismail', 'Karyawan Swasta', 'Dahliana Sasih Kirana', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486010', 'Mohamad Rifki S.', 'Karyawan Swasta', 'Karmiatun', 'Guru');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486019', 'Ari Nugroho', 'Staf Khusus', 'Amiradhana Salsabila', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486020', 'Damar Pradana', 'Karyawan Swasta', 'Erliza Fharania', 'Karyawan Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486021', 'Samsu Mardi', 'Wiraswasta', 'Welli Yupika Sari', 'Pegawai BUMN');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486011', 'Rana Anandhika', 'Karyawan Swasta', 'Rani Syafira', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486012', 'Garry Arya Wicaksana ', 'Karyawan Swasta', 'Windy Febiola', 'Karyawan Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486022', 'Rangga Dwi Prakoso', 'Karyawan Swasta', 'Marliana Putri', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486023', 'Liriko Budiman', 'Karyawan Swasta', 'Vicka Marcella', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486024', 'Rahmad Pardomuan', 'Karyawan Swasta', 'Risca Rusmawati', 'Wiraswasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486025', 'Asmara Edy', 'Karyawan Swasta', 'Tulus Laksmi Andayani', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486026', 'Suthorik Eri Nugroho', 'Wiraswata', 'Sri Darmini', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486013', 'Anndri Hermansyah', 'PNS', 'Normasari', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486027', 'Moh Jibril ', 'Wiraswasta', 'Sri Puspita Dewi', 'Pegawai BUMN');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486014', ' Muhammad Irnas', 'Karyaan Swasta', 'Novrita Nelis', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486028', 'Muhammad Syarifuddin Fajri', 'PNS', 'Betta Desirani', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486029', 'Anton Romadhoni', 'Karyaan Swasta', 'Nadia Rifqi Aulia', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486030', 'Tarjono', 'PNS', 'Ira Yustiana', 'Pegawai Swasta');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486031', 'Farhan Mursalin', 'ASN', 'Leili Rosa', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486032', 'Anung Wicaksono', 'Wirausaha', 'Fenny Novita', 'Karyawan');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486015', 'Muhammad Aldi Putra ', 'Wiraswasta', 'Fendarni Werdiyanti', 'IRT/Dokter Gigi');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486033', 'Muhammad Rizal Syahiirul Alim', 'Pegawai BUMN', 'Meiga Yosinanda Widodo', 'IRT');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486016', 'Susanto', 'Karyawan', 'Dewi Nugrahaningiyas', 'PNS');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486034', 'Muhammad Julsandi ', 'Swasta', 'Melisa Ismed', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486035', 'Syafieq Manshur', 'Wirausaha', 'Sita Fajar Afriyanti', 'Wirausaha');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486017', 'Agus Arie Wibowo', 'Karyaan Swasta', 'Puji Laela', 'Ibu Rumah Tangga');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486036', 'Donny Julianto', 'Karyawan', 'Transisca Fajar Lestari', 'Karyawan');
+INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES ('2340486018', 'Muhammad Al Mursalatul Fajar', 'Wiraswasta', 'Annisa Rahmawati', 'Guru');

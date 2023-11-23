@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -318,7 +319,7 @@ public class EditSiswa extends javax.swing.JFrame {
         
     } catch (SQLException ex) {
         ex.printStackTrace();
-        // Handle SQL exception (e.g., display an error message)
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
    
