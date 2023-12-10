@@ -7,8 +7,18 @@ package dewantaradb;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -17,13 +27,19 @@ import javax.swing.JOptionPane;
 public class NewSIswa extends javax.swing.JFrame {
     private static final String JDBC_URL = "jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true;databaseName=Dewantara";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Strong.Pwd-123";
+    private static final String PASSWORD = "reallyStrongPwd123";
+    private double totalPrice = 1000000;   
+    private int nomorTransaksi = 0;
+    
+
 
     /**
      * Creates new form NewSIswa
      */
     public NewSIswa() {
         initComponents();
+        totalHarga.setText(String.valueOf(totalPrice));
+        pendaftaran.setEnabled(false);
     }
 
     /**
@@ -63,6 +79,15 @@ public class NewSIswa extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jTextField10 = new javax.swing.JTextField();
         gender = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        pendaftaran = new javax.swing.JRadioButton();
+        spp = new javax.swing.JRadioButton();
+        daftarUlang = new javax.swing.JRadioButton();
+        seragam = new javax.swing.JRadioButton();
+        buku = new javax.swing.JRadioButton();
+        jLabel14 = new javax.swing.JLabel();
+        totalHarga = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +158,58 @@ public class NewSIswa extends javax.swing.JFrame {
 
         gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
 
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel13.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel13.setText("Pembayaran");
+
+        pendaftaran.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        pendaftaran.setSelected(true);
+        pendaftaran.setText("Pendaftaran");
+        pendaftaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pendaftaranActionPerformed(evt);
+            }
+        });
+
+        spp.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        spp.setText("SPP");
+        spp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sppActionPerformed(evt);
+            }
+        });
+
+        daftarUlang.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        daftarUlang.setText("Daftar Ulang");
+        daftarUlang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daftarUlangActionPerformed(evt);
+            }
+        });
+
+        seragam.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        seragam.setText("Seragam");
+        seragam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seragamActionPerformed(evt);
+            }
+        });
+
+        buku.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        buku.setText("Buku");
+        buku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bukuActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("SF Pro Display", 0, 18)); // NOI18N
+        jLabel14.setText("Total Bayar :");
+
+        totalHarga.setFont(new java.awt.Font("SF Pro Display", 0, 18)); // NOI18N
+        totalHarga.setText("blank");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -144,14 +221,6 @@ public class NewSIswa extends javax.swing.JFrame {
                         .addGap(104, 104, 104)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
@@ -160,10 +229,6 @@ public class NewSIswa extends javax.swing.JFrame {
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField10)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -185,18 +250,53 @@ public class NewSIswa extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(279, 279, 279)
-                        .addComponent(jLabel1)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel13))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(pendaftaran)
+                        .addGap(18, 18, 18)
+                        .addComponent(spp)
+                        .addGap(18, 18, 18)
+                        .addComponent(daftarUlang)
+                        .addGap(18, 18, 18)
+                        .addComponent(seragam)
+                        .addGap(18, 18, 18)
+                        .addComponent(buku))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(totalHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +334,7 @@ public class NewSIswa extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,11 +350,26 @@ public class NewSIswa extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pendaftaran)
+                    .addComponent(spp)
+                    .addComponent(daftarUlang)
+                    .addComponent(seragam)
+                    .addComponent(buku))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(totalHarga))
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,13 +387,12 @@ public class NewSIswa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //        Frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     String namaSiswa = jTextField1.getText();
-    int nisSiswa = Integer.parseInt(jTextField2.getText());
+    String nisSiswa = jTextField2.getText();
     String genderSiswa = gender.getSelectedItem().toString();
     String tempatSiswa = jTextField4.getText();
     String tanggalLahirSiswa = jTextField5.getText();
@@ -289,31 +403,198 @@ public class NewSIswa extends javax.swing.JFrame {
     String pekerjaanAyah = jTextField8.getText();
     String namaIbu = jTextField7.getText();
     String pekerjaanIbu = jTextField6.getText();
-
-    // Lakukan operasi create Siswa dan OrangTua di database
-    if (createSiswa(namaSiswa, nisSiswa, genderSiswa, tempatSiswa, tanggalLahirSiswa, alamatSiswa, noTelpSiswa)) {
+    
+    String pembayar = jTextField7.getText();
+    String penerima = "admin";
+    
+    try {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date tanggalLahir = dateFormat.parse(tanggalLahirSiswa);
+     if (createSiswa(namaSiswa, nisSiswa, genderSiswa, tempatSiswa, tanggalLahir, alamatSiswa, noTelpSiswa)) {
         createOrangTua(nisSiswa, namaAyah, pekerjaanAyah, namaIbu, pekerjaanIbu);
+        if(createTransaksi(nisSiswa, pembayar, totalPrice, penerima)){
+        
+        List<JRadioButton> selectedRadioButtons = getSelectedRadioButtons(pendaftaran,buku,seragam,spp,daftarUlang);
+
+
+    if (!selectedRadioButtons.isEmpty()) {
+        for (JRadioButton selectedRadioButton : selectedRadioButtons) {
+            double price = getPriceForRadioButton(selectedRadioButton.getText());
+
+            createKeteranganTransaksi(nomorTransaksi, price, selectedRadioButton.getText());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a radio button", "Warning", JOptionPane.WARNING_MESSAGE);
     }
+        }
+    }
+    } catch (ParseException e) {
+    e.printStackTrace();  // Handle the exception appropriately
+    }
+    // Lakukan operasi create Siswa dan OrangTua di database
+   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void daftarUlangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarUlangActionPerformed
+        updateTotalPrice("Daftar Ulang", daftarUlang.isSelected());
+    }//GEN-LAST:event_daftarUlangActionPerformed
+
+    private void sppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sppActionPerformed
+        updateTotalPrice("SPP", spp.isSelected());
+    }//GEN-LAST:event_sppActionPerformed
+
+    private void pendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendaftaranActionPerformed
+       
+        
+    }//GEN-LAST:event_pendaftaranActionPerformed
+
+    private void seragamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seragamActionPerformed
+         updateTotalPrice("Seragam", seragam.isSelected());
+    }//GEN-LAST:event_seragamActionPerformed
+
+    private void bukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuActionPerformed
+        updateTotalPrice("Buku", buku.isSelected());
+    }//GEN-LAST:event_bukuActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
-    private boolean createSiswa(String nama, int nis, String gender, String tempat, String tanggalLahir, String alamat, String noTelp) {
+ private List<JRadioButton> getSelectedRadioButtons(JRadioButton... radioButtons) {
+    List<JRadioButton> selectedButtons = new ArrayList<>();
+
+    for (JRadioButton radioButton : radioButtons) {
+        if (radioButton.isSelected()) {
+            selectedButtons.add(radioButton);
+        }
+    }
+
+    return selectedButtons;
+}
+
+
+
+   private double getPriceForRadioButton(String radioButton) {
+        return switch (radioButton) {
+            case "SPP" -> 250000.0;
+            case "Daftar Ulang" -> 500000.0;
+            case "Pendaftaran" -> 1000000.0;
+            case "Buku" -> 200000.0;
+            case "Seragam" -> 400000.0;
+            default -> 0.0;
+        }; // Default value if the radio button text is not recognized
+}
+
+    
+    
+    private void updateTotalPrice(String item, boolean selected) {
+    switch (item) {
+        case "SPP" -> {
+            if (selected) {
+                totalPrice += 250000.0;
+            } else {
+                totalPrice -= 250000.0;
+            }
+            break;
+            }
+        case "Daftar Ulang" -> {
+            if (selected) {
+                totalPrice += 500000.0;
+            } else {
+                totalPrice -= 500000.0;
+            } 
+            break;
+            }
+        case "Buku" -> {
+            if (selected) {
+                totalPrice += 200000.0;
+            } else {
+                totalPrice -= 200000.0;
+            }
+            break;
+            }
+        case "Seragam" -> {
+            if (selected) {
+                totalPrice += 400000.0;
+            } else {
+                totalPrice -= 400000.0;
+            }
+            break;
+            }
+        default -> {
+            }
+    }
+        totalHarga.setText(String.valueOf(totalPrice));
+        }
+    
+
+
+private void createKeteranganTransaksi(int nomorTransaksi, double jumlahUang, String keterangan) {
+    try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
+        String query = "INSERT INTO KeteranganTransaksi (NomorTransaksi, JumlahUang, Keterangan) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, nomorTransaksi);
+            preparedStatement.setDouble(2, jumlahUang);
+            preparedStatement.setString(3, keterangan);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+               this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan detail transaksi", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
+    }
+}
+
+
+    
+     private boolean createTransaksi(String nis, String pembayar, double jumlahUang, String penerima) {
+        boolean success = false;
+    try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
+        String query = "INSERT INTO Transaksi (NIS, Pembayar, JumlahUang, TanggalBayar, Penerima) VALUES (?, ?, ?, GETDATE(), ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, nis);
+            preparedStatement.setString(2, pembayar);
+            preparedStatement.setDouble(3, jumlahUang);
+            preparedStatement.setString(4, penerima);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+               try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        nomorTransaksi = generatedKeys.getInt(1);
+                    }
+                }
+               success = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan transaksi", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
+    }
+    return success;
+}
+    
+    private boolean createSiswa(String nama, String nis, String gender, String tempat, Date tanggalLahir, String alamat, String noTelp) {
         boolean success = false;
     try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
         String query = "INSERT INTO Siswa (NIS, Nama, Gender, Tempat, TanggalLahir, Alamat, noTelp) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, nis);
+            preparedStatement.setString(1, nis);
             preparedStatement.setString(2, nama);
             preparedStatement.setString(3, gender);
             preparedStatement.setString(4, tempat);
-            preparedStatement.setString(5, tanggalLahir);
+            preparedStatement.setDate(5, new java.sql.Date(tanggalLahir.getTime()));
             preparedStatement.setString(6, alamat);
             preparedStatement.setString(7, noTelp);
 
@@ -331,11 +612,11 @@ public class NewSIswa extends javax.swing.JFrame {
         return success;
     }
 
-    private void createOrangTua(int nis, String namaAyah, String pekerjaanAyah, String namaIbu, String pekerjaanIbu) {
+    private void createOrangTua(String nis, String namaAyah, String pekerjaanAyah, String namaIbu, String pekerjaanIbu) {
     try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
         String query = "INSERT INTO OrangTua (NIS, NamaAyah, KerjaAyah, NamaIbu, KerjaIbu) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, nis);
+            preparedStatement.setString(1, nis);
             preparedStatement.setString(2, namaAyah);
             preparedStatement.setString(3, pekerjaanAyah);
             preparedStatement.setString(4, namaIbu);
@@ -387,6 +668,8 @@ public class NewSIswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton buku;
+    private javax.swing.JRadioButton daftarUlang;
     private javax.swing.JComboBox<String> gender;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -394,6 +677,8 @@ public class NewSIswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -404,6 +689,7 @@ public class NewSIswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -415,5 +701,9 @@ public class NewSIswa extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panel;
+    private javax.swing.JRadioButton pendaftaran;
+    private javax.swing.JRadioButton seragam;
+    private javax.swing.JRadioButton spp;
+    private javax.swing.JLabel totalHarga;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,15 +14,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class Dewantara extends javax.swing.JFrame {
     private static final String JDBC_URL = "jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true;databaseName=Dewantara";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Strong.Pwd-123"; 
+    private static final String PASSWORD = "reallyStrongPwd123"; 
     
     DetailDewantara DetailFrame = new DetailDewantara();    
     DetailOrangTua DetailOrtu = new DetailOrangTua();
@@ -53,6 +58,8 @@ public class Dewantara extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -66,6 +73,14 @@ public class Dewantara extends javax.swing.JFrame {
         delete = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
         create = new javax.swing.JButton();
+        filter = new javax.swing.JLabel();
+        daftarUlang = new javax.swing.JRadioButton();
+        pendaftaran = new javax.swing.JRadioButton();
+        spp = new javax.swing.JRadioButton();
+        buku = new javax.swing.JRadioButton();
+        seragam = new javax.swing.JRadioButton();
+        apply = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,7 +114,7 @@ public class Dewantara extends javax.swing.JFrame {
             }
         });
 
-        table.setFont(new java.awt.Font("SF Pro Display", 0, 12)); // NOI18N
+        table.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -147,32 +162,97 @@ public class Dewantara extends javax.swing.JFrame {
             }
         });
 
+        filter.setFont(new java.awt.Font("SF Pro", 1, 12)); // NOI18N
+        filter.setText("Filter:");
+
+        daftarUlang.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        daftarUlang.setText("Daftar Ulang");
+        daftarUlang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daftarUlangActionPerformed(evt);
+            }
+        });
+
+        pendaftaran.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        pendaftaran.setText("Pendaftaran");
+        pendaftaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pendaftaranActionPerformed(evt);
+            }
+        });
+
+        spp.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        spp.setText("SPP");
+        spp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sppActionPerformed(evt);
+            }
+        });
+
+        buku.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        buku.setText("Buku");
+        buku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bukuActionPerformed(evt);
+            }
+        });
+
+        seragam.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
+        seragam.setText("Seragam");
+        seragam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seragamActionPerformed(evt);
+            }
+        });
+
+        apply.setText("Apply");
+        apply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyActionPerformed(evt);
+            }
+        });
+
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(300, 300, 300))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 114, Short.MAX_VALUE)
+                    .addComponent(filter)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(create, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                    .addComponent(create, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(pendaftaran)
+                    .addComponent(daftarUlang)
+                    .addComponent(spp)
+                    .addComponent(buku)
+                    .addComponent(seragam)
+                    .addComponent(apply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(347, 347, 347))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,15 +261,14 @@ public class Dewantara extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(create)
                         .addGap(18, 18, 18)
@@ -199,8 +278,25 @@ public class Dewantara extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(edit)
                         .addGap(18, 18, 18)
-                        .addComponent(refresh)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addComponent(refresh)
+                        .addGap(18, 18, 18)
+                        .addComponent(filter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pendaftaran)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(daftarUlang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buku)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(seragam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(apply)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clear))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,8 +325,7 @@ public class Dewantara extends javax.swing.JFrame {
              searchAndDisplayOrtu(keyword);
         }
             case "Transaksi" -> {
-               
-            
+             searchAndDisplayTransaksi(keyword);
           }
         }
        
@@ -376,6 +471,15 @@ public class Dewantara extends javax.swing.JFrame {
                 refresh.setVisible(true);
                 edit.setVisible(true);
                 create.setVisible(true);
+                pendaftaran.setVisible(true);                
+                spp.setVisible(true);
+                buku.setVisible(true);
+                daftarUlang.setVisible(true);
+                seragam.setVisible(true);
+                apply.setVisible(true);
+                clear.setVisible(true);                
+                filter.setVisible(true);
+
                 } catch (SQLException ex) {
                     Logger.getLogger(Dewantara.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -386,6 +490,14 @@ public class Dewantara extends javax.swing.JFrame {
                 create.setVisible(false);
                 refresh.setVisible(true);
                 edit.setVisible(true);
+                pendaftaran.setVisible(false);                
+                spp.setVisible(false);
+                buku.setVisible(false);
+                daftarUlang.setVisible(false);
+                seragam.setVisible(false);
+                apply.setVisible(false);
+                clear.setVisible(false);
+                filter.setVisible(false);
                 } catch (SQLException ex) {
                     Logger.getLogger(Dewantara.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -396,6 +508,14 @@ public class Dewantara extends javax.swing.JFrame {
                 create.setVisible(true);
                 refresh.setVisible(true);
                 edit.setVisible(false);
+                pendaftaran.setVisible(false);                
+                spp.setVisible(false);
+                buku.setVisible(false);
+                daftarUlang.setVisible(false);
+                seragam.setVisible(false);
+                apply.setVisible(false);
+                clear.setVisible(false);
+                filter.setVisible(false);
                 } catch (SQLException ex) {
                     Logger.getLogger(Dewantara.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -405,11 +525,18 @@ public class Dewantara extends javax.swing.JFrame {
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         String selectedOption = jComboBox1.getSelectedItem().toString();
+       
+        search.setText("");
 
         switch (selectedOption) {
             case "Siswa" -> {
             try {
                 displaySiswaData();
+                spp.setSelected(false);
+                pendaftaran.setSelected(false);
+                daftarUlang.setSelected(false);
+                buku.setSelected(false);
+                seragam.setSelected(false);
             } catch (SQLException ex) {
                 Logger.getLogger(Dewantara.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -448,6 +575,39 @@ public class Dewantara extends javax.swing.JFrame {
         
     }//GEN-LAST:event_createActionPerformed
 
+    private void pendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendaftaranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pendaftaranActionPerformed
+
+    private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
+        filteringDisplaySiswa();
+    }//GEN-LAST:event_applyActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        spp.setSelected(false);
+        pendaftaran.setSelected(false);
+        daftarUlang.setSelected(false);
+        buku.setSelected(false);
+        seragam.setSelected(false);
+
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void sppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sppActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sppActionPerformed
+
+    private void daftarUlangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarUlangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_daftarUlangActionPerformed
+
+    private void bukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bukuActionPerformed
+
+    private void seragamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seragamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seragamActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -459,7 +619,67 @@ public class Dewantara extends javax.swing.JFrame {
     }
 }
     
-    private void searchAndDisplaySiswa(String keyword) {
+private void filteringDisplaySiswa() {
+    
+    List<String> selectedCheckboxes = new ArrayList<>();
+
+    if (pendaftaran.isSelected()) {
+        selectedCheckboxes.add("'Pendaftaran'");
+    }
+    if (spp.isSelected()) {
+        selectedCheckboxes.add("'SPP'");
+    }
+    if (daftarUlang.isSelected()) {
+        selectedCheckboxes.add("'Daftar Ulang'");
+    }
+    if (buku.isSelected()) {
+        selectedCheckboxes.add("'Buku'");
+    }
+    if (seragam.isSelected()) {
+        selectedCheckboxes.add("'Seragam'");
+    }
+
+    if (selectedCheckboxes.isEmpty()) {
+        try {
+            displaySiswaData();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dewantara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } else {
+        // Perform the filtering based on selected checkboxes
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
+            String query = "SELECT S.NIS, S.Nama, S.Gender " +
+                           "FROM Siswa S " +
+                           "INNER JOIN Transaksi T ON S.NIS = T.NIS " +
+                           "INNER JOIN KeteranganTransaksi KT ON T.NomorTransaksi = KT.NomorTransaksi " +
+                           "WHERE KT.Keterangan IN (" + String.join(",", selectedCheckboxes) + ") " +
+                           "GROUP BY S.NIS, S.Nama, S.Gender " +
+                           "HAVING COUNT(DISTINCT KT.Keterangan) = " + selectedCheckboxes.size();
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                // Execute your query and process the results as needed
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                    tableModel.setRowCount(0);
+
+                    while (resultSet.next()) {
+                        String nis = resultSet.getString("NIS");
+                        String nama = resultSet.getString("Nama");
+                        String gender = resultSet.getString("Gender");
+
+                        Object[] rowData = {nis, nama, gender};
+                        tableModel.addRow(rowData);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+ private void searchAndDisplaySiswa(String keyword) {
     // Lakukan koneksi ke database dan eksekusi query pencarian
     try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
         String query = "SELECT NIS, Nama, Gender FROM Siswa WHERE Nama LIKE ?";
@@ -485,6 +705,7 @@ public class Dewantara extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
+
     
     private void searchAndDisplayOrtu(String keyword) {
     // Lakukan koneksi ke database dan eksekusi query pencarian
@@ -517,6 +738,40 @@ public class Dewantara extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
     }
 }
+    
+    private void searchAndDisplayTransaksi(String studentName){
+    try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
+        String query = "SELECT Transaksi.NIS, Siswa.Nama AS NamaSiswa, Transaksi.NomorTransaksi, Transaksi.JumlahUang " +
+                       "FROM Transaksi " +
+                       "JOIN Siswa ON Transaksi.NIS = Siswa.NIS " +
+                       "WHERE Siswa.Nama LIKE ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + studentName + "%");
+            
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                DefaultTableModel model = new NonEditableTableModel();
+                model.addColumn("Nomor Transaksi");
+                model.addColumn("Nama Siswa");
+                model.addColumn("Jumlah Uang");
+
+                while (resultSet.next()) {
+                    Object[] row = {
+                            resultSet.getInt("NomorTransaksi"),
+                            resultSet.getString("NamaSiswa"),
+                            resultSet.getBigDecimal("JumlahUang"),
+                    };
+                    model.addRow(row);
+                }
+
+                table.setModel(model);
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, ex, "Peringatan", JOptionPane.WARNING_MESSAGE);
+    }
+}
+
 
     
     private void displaySiswaData() throws SQLException {
@@ -859,17 +1114,27 @@ public class Dewantara extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton apply;
+    private javax.swing.JRadioButton buku;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton clear;
     private javax.swing.JButton create;
+    private javax.swing.JRadioButton daftarUlang;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
+    private javax.swing.JLabel filter;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton pendaftaran;
     private javax.swing.JButton refresh;
     private javax.swing.JTextField search;
+    private javax.swing.JRadioButton seragam;
+    private javax.swing.JRadioButton spp;
     private javax.swing.JTable table;
     private javax.swing.JButton view;
     // End of variables declaration//GEN-END:variables

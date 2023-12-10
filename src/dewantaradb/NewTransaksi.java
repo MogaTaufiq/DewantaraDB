@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class NewTransaksi extends javax.swing.JFrame {
     private static final String JDBC_URL = "jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true;databaseName=Dewantara";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Strong.Pwd-123";
+    private static final String PASSWORD = "reallyStrongPwd123";
     private double jumlahUang = 0;
     private int nomorTransaksi = 0;
 
@@ -114,12 +114,17 @@ public class NewTransaksi extends javax.swing.JFrame {
         jLabel5.setText("Total Pembayaran:");
 
         totalPembayaran.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
+        totalPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalPembayaranActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
         jLabel6.setText("Pembayaran");
 
         jComboBox1.setFont(new java.awt.Font("SF Pro", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SPP", "Daftar Ulang", "Pendaftaran", "Buku", "Seragam" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SPP", "Daftar Ulang", "Buku", "Seragam" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -367,6 +372,10 @@ public class NewTransaksi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void totalPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPembayaranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalPembayaranActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -376,7 +385,6 @@ public class NewTransaksi extends javax.swing.JFrame {
         return switch (product) {
             case "SPP" -> 250000.0;
             case "Daftar Ulang" -> 500000.0;
-            case "Pendaftaran" -> 1000000.0;
             case "Buku" -> 200000.0;
             case "Seragam" -> 400000.0;
             default -> 0.0;

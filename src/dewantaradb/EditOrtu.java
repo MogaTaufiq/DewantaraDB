@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class EditOrtu extends javax.swing.JFrame {
     private static final String JDBC_URL = "jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true;databaseName=Dewantara";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Strong.Pwd-123";
+    private static final String PASSWORD = "reallyStrongPwd123";
     
     private int id;
     
